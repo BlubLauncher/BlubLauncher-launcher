@@ -543,8 +543,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "blublauncher-launcher-v020"
-version = "0.0.1"
+name = "blublauncher-launcher-v040"
+version = "0.4.0"
 dependencies = [
  "async-compression",
  "async-trait",

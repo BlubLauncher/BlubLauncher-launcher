@@ -1,6 +1,6 @@
 [package]
-name = "blublauncher-launcher-v020"
-version = "0.0.1"
+name = "blublauncher-launcher-v040"
+version = "0.4.0"
 description = "A Tauri App"
 authors = ["BlubTeam"]
 edition = "2021"

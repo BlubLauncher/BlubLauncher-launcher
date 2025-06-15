@@ -32,12 +32,11 @@ const navItems = [
   { id: "profiles", icon: "solar:user-id-bold", label: "Profiles" },
   { id: "mods", icon: "solar:widget-bold", label: "Mods" },
   { id: "skins", icon: "solar:emoji-funny-circle-bold", label: "Skins" },
-//  { id: "store", icon: "solar:shop-bold", label: "Store" },
   { id: "settings", icon: "solar:settings-bold", label: "Settings" },
 ];
 
 const appConfig = {
-  version: "v0.5.22",
+  version: "v0.4.0",
 };
 
 interface AppLayoutProps {
@@ -370,7 +369,7 @@ function HeaderBar({ minimizeRef, maximizeRef, closeRef }: HeaderBarProps) {
             className="font-minecraft text-4xl tracking-wider text-white font-bold lowercase text-shadow"
             data-tauri-drag-region
           >
-            noriskclient
+            BlubLauncher
           </h1>
           <span className="text-white/70 font-minecraft-ten text-[8px] font-normal -mt-2.5">
             {appVersion || "v?.?.?"}

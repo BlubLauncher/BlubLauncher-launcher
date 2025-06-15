@@ -408,7 +408,7 @@ export function MainLaunchButton({
             variant={
               getButtonVariant() === "destructive" ? "destructive" : "3d"
             }
-            aria-label="Select version"
+            aria-label="Select Pack"
           />
         </div>
       </div>
@@ -416,7 +416,7 @@ export function MainLaunchButton({
       {versions && (
         <ProfileSelectionModal
           onVersionChange={handleVersionChange}
-          title="Select Version"
+          title="Select Pack"
         />
       )}
     </div>

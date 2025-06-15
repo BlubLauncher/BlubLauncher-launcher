@@ -386,7 +386,7 @@ export function SettingsTab() {
             </div>
             <div className="w-full px-2">
               <RangeSlider
-                value={tempConfig.concurrent_downloads || 3}
+                value={tempConfig?.concurrent_downloads || 3}
                 onChange={handleConcurrentDownloadsChange}
                 min={1}
                 max={10}
@@ -418,7 +418,7 @@ export function SettingsTab() {
             </div>
             <div className="w-full px-2">
               <RangeSlider
-                value={tempConfig.concurrent_io_limit || 10}
+                value={tempConfig?.concurrent_io_limit || 10}
                 onChange={handleConcurrentIoLimitChange}
                 min={1}
                 max={20}
@@ -448,56 +448,12 @@ export function SettingsTab() {
             </h3>
           </div>
           <p className="text-base text-white/70 font-minecraft-ten mt-2">
-            Choose your preferred accent color for the launcher
+            Choose your favorite accent color for the launcher.
           </p>
         </div>
 
         <div className="mt-6">
           <ColorPicker shape="square" size="md" showCustomOption={false} />
-        </div>
-
-        <div className="mt-6 p-4 rounded-lg border border-[#ffffff20]">
-          <div className="flex items-center gap-2 mb-3">
-            <Icon icon="solar:eye-bold" className="w-5 h-5 text-white" />
-            <h4 className="text-2xl font-minecraft text-white lowercase">
-              Preview
-            </h4>
-          </div>
-          <div className="flex flex-wrap gap-4 mt-3">
-            <Button
-              icon={<Icon icon="solar:play-bold" />}
-              size="md"
-              variant="flat"
-            >
-              Play Game
-            </Button>
-            <Button
-              variant="flat-secondary"
-              icon={<Icon icon="solar:settings-bold" />}
-              size="md"
-            >
-              Settings
-            </Button>
-            <Button
-              variant="ghost"
-              icon={<Icon icon="solar:download-bold" />}
-              size="md"
-            >
-              Download
-            </Button>
-          </div>
-        </div>
-
-        <div className="mt-6 p-4 rounded-lg border border-[#ffffff20] bg-black/10">
-          <div className="flex items-center gap-2 mb-2">
-            <Icon icon="solar:lock-bold" className="w-5 h-5 text-white/50" />
-            <h4 className="text-xl font-minecraft text-white/50 lowercase">
-              Custom Colors
-            </h4>
-          </div>
-          <p className="text-sm text-white/40 font-minecraft-ten">
-            Custom color selection is currently disabled
-          </p>
         </div>
       </Card>
 
@@ -615,7 +571,7 @@ export function SettingsTab() {
               size="md"
               icon={<Icon icon="solar:eye-scan-bold" className="w-5 h-5" />}
             >
-              Preview Fullscreen
+              Preview
             </Button>
           </div>
         )}

@@ -1,7 +1,7 @@
 use crate::error::{AppError, CommandError};
 use crate::minecraft::api::norisk_api::CrashlogDto;
 use crate::minecraft::api::norisk_api::NoRiskApi;
-use crate::minecraft::api::wordpress_api::{BlogPost, WordPressApi};
+// use crate::minecraft::api::wordpress_api::{BlogPost, WordPressApi}; // entfernt, weil wir BlogPost jetzt selbst definieren
 use crate::minecraft::auth::minecraft_auth::Credentials;
 use crate::state::state_manager::State;
 use chrono::{Duration as ChronoDuration, Utc};
@@ -9,16 +9,50 @@ use log::info;
 use log::{debug, error};
 use std::sync::Arc;
 use tauri::{AppHandle, Manager, Url, UserAttentionType, WebviewUrl, WebviewWindowBuilder};
+use serde::Deserialize;
 
-/// Fetches news and changelog posts from the WordPress API.
-///
-/// # Returns
-///
-/// * `Result<Vec<BlogPost>, CommandError>` - A vector of blog posts or an error.
+/// Eigene BlogPost-Datenstruktur – passt zu deiner JSON-Datei
+#[derive(Debug, Deserialize, serde::Serialize)]
+pub struct BlogPost {
+    pub id: i32,
+    pub yoast_head_json: YoastHeadJson,
+}
+
+#[derive(Debug, Deserialize, serde::Serialize)]
+pub struct YoastHeadJson {
+    pub title: Option<String>,
+    pub og_image: Option<Vec<OgImage>>,
+    pub og_url: Option<String>,
+}
+
+#[derive(Debug, Deserialize, serde::Serialize)]
+pub struct OgImage {
+    pub url: String,
+}
+
+/// Holt die News von deiner eigenen JSON-Datei
 #[tauri::command]
 pub async fn get_news_and_changelogs_command() -> Result<Vec<BlogPost>, CommandError> {
     info!("Executing get_news_and_changelogs_command");
-    Ok(WordPressApi::get_news_and_changelogs().await?)
+
+    let url = "https://blublauncher.grueneeule.de/assets/json/launcher/news.json";
+
+    let response = reqwest::get(url)
+        .await
+        .map_err(|e| CommandError::from(AppError::Other(format!(
+            "Fehler beim Abrufen der News: {}",
+            e
+        ))))?;
+
+    let posts: Vec<BlogPost> = response
+        .json()
+        .await
+        .map_err(|e| CommandError::from(AppError::Other(format!(
+            "Fehler beim Parsen der News: {}",
+            e
+        ))))?;
+
+    Ok(posts)
 }
 
 #[tauri::command]
